@@ -12,14 +12,14 @@ const Flow = () => {
           </p>
 
           <p className="text-lg font-light leading-relaxed max-w-3xl">
-            This is a space to share more about the business: who's behind it,
-            what it does and what this site has to offer. It’s an opportunity to
+            This is a space to share more about the business: who&apos;s behind it,
+            what it does and what this site has to offer. It&apos;s an opportunity to
             tell the story behind the business or describe a special service or
             product it offers. You can use this section to share the company
             history or highlight a particular feature that sets it apart from
             competitors. Let the writing speak for itself. Keep a consistent
             tone and voice throughout the website to stay true to the brand
-            image and give visitors a taste of the company’s values and
+            image and give visitors a taste of the company&apos;s values and
             personality.
           </p>
         </div>

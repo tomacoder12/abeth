@@ -1,5 +1,5 @@
 import React from 'react'
-import { Hero, Flow, Teachers, FloatingImages } from './components'
+import { Hero, Flow, Teachers } from './components'
 
 const page = () => {
   return (

@@ -50,7 +50,7 @@ export default function AboutSection() {
           data-aos-delay="200"
         >
           At Abeth, we are committed to bringing balance and joy to your life.
-          We offer a broad range of classes for every level. It's time to invite
+          We offer a broad range of classes for every level. It&apos;s time to invite
           more meaning and calm to your daily routine.
         </p>
 
