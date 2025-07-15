@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
         `;
 
         await mailUser(email, subject, message);
-        console.log('Confirmation email sent to', email);
+        // console.log('Confirmation email sent to', email);
       } catch (err) {
         console.error(`Failed to update ticket or send email`, err);
         return NextResponse.json({ error: 'Database or mail error' }, { status: 500 });
