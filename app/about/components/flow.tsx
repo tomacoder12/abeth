@@ -12,15 +12,11 @@ const Flow = () => {
           </p>
 
           <p className="text-lg font-light leading-relaxed max-w-3xl">
-            This is a space to share more about the business: who&apos;s behind it,
-            what it does and what this site has to offer. It&apos;s an opportunity to
-            tell the story behind the business or describe a special service or
-            product it offers. You can use this section to share the company
-            history or highlight a particular feature that sets it apart from
-            competitors. Let the writing speak for itself. Keep a consistent
-            tone and voice throughout the website to stay true to the brand
-            image and give visitors a taste of the company&apos;s values and
-            personality.
+            Welcome to a space where we share the heart and soul behind our business. Here, you&apos;ll meet the people driving our mission, learn what we do, and discover what makes this site and our services truly unique.
+
+            It&apos;s your chance to dive into our story — from our beginnings to the passion that fuels us today. Whether it&apos;s a signature product or a standout service, this is where we highlight what sets us apart and why we do what we do.
+
+            Our words reflect who we are: authentic, consistent, and committed to delivering value with every interaction. Through this space, we invite you to connect with our brand&apos;s personality and core values, gaining a genuine feel for what makes us different.
           </p>
         </div>
 

@@ -62,7 +62,7 @@ export default function Footer() {
             <h3 className="font-semibold mb-3">Socials</h3>
             <div className="space-y-1 flex flex-col text-2xl md:text-4xl lg:text-6xl font-bold tracking-wide">
               {/* <Link href={"/fb"} className={animatedLink}>FACEBOOK</Link> */}
-              <Link href={"/linkedin"} className={animatedLink}>LINKEDIN</Link>
+              <Link target="_blank" href={"/linkedin"} className={animatedLink}>LINKEDIN</Link>
               {/* <Link href={"/ig"} className={animatedLink}>INSTAGRAM</Link> */}
             </div>
           </div>
