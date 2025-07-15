@@ -11,8 +11,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Abeth LLC",
-  description: "Welcome to Abeth Health and Wellness",
+  title: "Abeth LLC – Health and Wellness Solutions",
+  description: "Discover holistic health and wellness services at Abeth LLC. Empowering you to live a healthier, balanced life.",
 };
 
 export default function RootLayout({

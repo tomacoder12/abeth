@@ -45,7 +45,7 @@ const Form = () => {
             <p>17 W ST Orange</p>
             <p>MA 01364-1143</p>
             <p>admin@abeth.org</p>
-            <p>123-456-7890</p>
+            <p>+1 (978) 728-2042</p>
           </div>
 
           <div className="mt-10">
