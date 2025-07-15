@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Hero = () => {
+  const [bookings, setBookings] = useState([]);
+  console.log(bookings)
+
+  useEffect(() => {
+    const fetchBookings = async () => {
+      try {
+        const res = await fetch('/api/bookings');
+        if (!res.ok) throw new Error('Failed to fetch bookings');
+        const data = await res.json();
+        setBookings(data);
+        console.log("Bookings:", data);
+      } catch (error) {
+        console.error("Error fetching bookings:", error);
+      }
+    };
+
+    fetchBookings();
+  }, []);
+
   return (
     <div
       className="relative h-screen w-screen bg-cover bg-center bg-no-repeat"

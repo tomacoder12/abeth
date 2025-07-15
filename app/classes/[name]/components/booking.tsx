@@ -3,24 +3,11 @@
 import { Calendar } from "@/components/ui/calendar";
 import { routes } from "@/constants";
 import { classAvailability } from "@/constants/data";
-import { Availability } from "@/types";
-import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-
-function getNextAvailableDate(avail: Availability, fromDate: Date): Date | null {
-  const dt = new Date(fromDate);
-  for (let i = 1; i <= 365; i++) {
-    dt.setDate(dt.getDate() + 1);
-    const weekday = dt.toLocaleDateString("en-US", { weekday: "long" });
-    const dateStr = dt.toISOString().slice(0, 10);
-    const off = avail.overrides?.find((o) => o.date === dateStr);
-    const hasWeekly = !!avail.weeklyHours[weekday]?.length;
-    if (!off?.isClosed && hasWeekly) return new Date(dt);
-  }
-  return null;
-}
+import { IoIosArrowDown, IoIosArrowBack } from "react-icons/io";
+import { useRouter } from "next/navigation";
 
 export default function BookingPage({
   classNameParam,
@@ -28,10 +15,13 @@ export default function BookingPage({
   classNameParam: keyof typeof classAvailability;
 }) {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
-  const [nextAvailableDate, setNextAvailableDate] = useState<Date | null>(null);
   const [showDetails, setShowDetails] = useState(false);
+  const router = useRouter()
 
   const avail = classAvailability[classNameParam];
+
+  // 👇 Auto-detect user time zone
+  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   const weekday = selectedDate?.toLocaleDateString("en-US", { weekday: "long" }) ?? "";
   const dateStr = selectedDate?.toISOString().slice(0, 10) ?? "";
@@ -45,7 +35,7 @@ export default function BookingPage({
         {/* Header */}
         <div className="space-y-8">
           <div className="flex items-center space-x-3">
-            <ArrowLeft />
+            <IoIosArrowBack />
             <Link href={routes.CLASSES} className="text-white">
               Back
             </Link>
@@ -64,7 +54,9 @@ export default function BookingPage({
               {/* Date section title with border */}
               <div className="border-b border-white mb-6 flex items-center justify-between">
                 <p className="text-lg pb-2">Select a Date and Time</p>
-                <p className="text-sm opacity-80">Time zone: {avail.timeZone}</p>
+                <p className="text-sm opacity-80">
+                  Time zone: {userTimeZone}
+                </p>
               </div>
 
               <div className="flex items-start">
@@ -73,7 +65,6 @@ export default function BookingPage({
                   selected={selectedDate}
                   onSelect={(date) => {
                     setSelectedDate(date);
-                    setNextAvailableDate(null);
                   }}
                   className="w-96"
                   disabled={(d) => {
@@ -153,11 +144,10 @@ export default function BookingPage({
                 >
                   <span>{showDetails ? "Less details" : "More details"}</span>
                   <span
-                    className={`transform transition-transform ${
-                      showDetails ? "rotate-180" : "rotate-0"
-                    }`}
+                    className={`transform transition-transform cursor-pointer ${showDetails ? "rotate-180" : "rotate-0"
+                      }`}
                   >
-                    ▼
+                    <IoIosArrowDown />
                   </span>
                 </button>
 
@@ -180,9 +170,28 @@ export default function BookingPage({
                 </AnimatePresence>
               </div>
 
-              <button className="mt-6 w-full cursor-pointer px-4 py-2 border border-white hover:bg-white hover:text-[#5A582F] transition">
-                Next
+              <button
+                className={`mt-6 w-full px-4 py-2 border border-white hover:bg-white hover:text-[#5A582F] transition ${times.length === 0
+                  ? "opacity-50 cursor-not-allowed hover:bg-transparent hover:text-black"
+                  : "cursor-pointer"
+                  }`}
+                disabled={times.length === 0}
+                onClick={() => {
+                  if (times.length === 0 || !selectedDate) return;
+
+                  const query = new URLSearchParams({
+                    service: classNameParam,
+                    date: selectedDate.toISOString().slice(0, 10),
+                    time: times[0].open,
+                    price: String(avail.price),
+                  }).toString();
+
+                  router.push(`/classes/${avail.label}/checkout?${query}`);
+                }}
+              >
+                Checkout
               </button>
+
             </div>
           </div>
         </div>

@@ -5,6 +5,8 @@ import { classAvailability } from '@/constants/data';
 import FilterDropdown from './filter';
 import { Separator } from '@/components/ui/separator';
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import { useRouter } from 'next/navigation';
+import { routes } from '@/constants';
 
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const timeSlots = ["08:00", "09:00", "10:00", "11:00", "12:00", "16:00", "17:00", "18:00"];
@@ -18,6 +20,7 @@ type ClassEntry = {
 const CalendarView = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [filters, setFilters] = useState<string[]>([]);
+  const router = useRouter()
 
   const weekDays = useMemo(() => {
     const start = startOfWeek(selectedDate, { weekStartsOn: 0 });
@@ -120,7 +123,7 @@ const CalendarView = () => {
                           <p className="text-xs">{c.data.instructor}</p>
                           <p className="text-xs">{c.data.duration}</p>
                           <p className="text-xs">{c.data.capacity} spots left</p>
-                          <button className="mt-1 w-full border border-white py-1 text-sm hover:bg-white hover:text-black cursor-pointer transition">
+                          <button onClick={() => router.push(`/classes/${c.name}`)} className="mt-1 w-full border border-white py-1 text-sm hover:bg-white hover:text-black cursor-pointer transition">
                             Book
                           </button>
                         </motion.div>
